@@ -58,6 +58,31 @@ int diameterOfTree(Node* root){
     return maxDai;
 }
 
+void preorder(Node* root){
+    if(root==NULL) return;
+    cout<<root->val<<" ";       //root
+    preorder(root->left);  //left
+    preorder(root->right);   //right
+}
+void inorder(Node* root){
+    if(root==NULL) return;
+    inorder(root->left); //left
+    cout<<root->val<<" ";  //root
+    inorder(root->right); //right
+}
+void postorder(Node* root){
+    if(root==NULL) return;
+    postorder(root->left);  //left
+    postorder(root->right);   //right
+    cout<<root->val<<" ";     //root
+}
+
+void print_Nth_Level_Ele(Node* root,int currlevel,int level){
+    if(root==NULL) return;
+    if(currlevel==level) cout<<root->val<<" ";
+    print_Nth_Level_Ele(root->left, currlevel+1 ,level);
+    print_Nth_Level_Ele(root->right, currlevel+1 ,level);
+}
 
 int main(){
     Node* a=new Node(1);
@@ -90,5 +115,15 @@ int main(){
 
     cout<<"Max Daimeter of Tree: "<<diameterOfTree(a)<<endl;
 
+    cout<<"preOrder: ";
+    preorder(a);
+    cout<<endl;
+    cout<<"inOrder: ";
+    inorder(a);
+    cout<<endl;
+    cout<<"postOrder: ";
+    postorder(a);
+    cout<<endl;
+    print_Nth_Level_Ele(a,1,2); // level 2 ele
     return 0;
 }
