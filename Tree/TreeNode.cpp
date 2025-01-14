@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+#include<queue>
 
 class Node{
     public:
@@ -41,7 +42,7 @@ int minVal(Node* root){
 
 int level(Node* root){
     if(root==NULL) return 0;
-    return 1+level(root->left)+level(root->right);
+    return 1+max(level(root->left), level(root->right));
 }
 
 void helper(Node* root,int& maxDai){
@@ -79,10 +80,38 @@ void postorder(Node* root){
 
 void print_Nth_Level_Ele(Node* root,int currlevel,int level){
     if(root==NULL) return;
-    if(currlevel==level) cout<<root->val<<" ";
+    if(currlevel==level){ 
+        cout<<root->val<<" ";
+        return;
+    }
     print_Nth_Level_Ele(root->left, currlevel+1 ,level);
     print_Nth_Level_Ele(root->right, currlevel+1 ,level);
 }
+
+void levelOrder(Node* root){
+    int l=level(root);
+    for(int i=1;i<=l;i++){
+        print_Nth_Level_Ele(root,1,i);
+        cout<<endl;
+    }
+}
+
+void levelOrder_Queue(Node* root){
+    if(root==NULL) return;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        Node* front=q.front();
+        q.pop();
+        cout<<front->val<<" ";
+        if(front->left!=NULL) q.push(front->left);
+        if(front->right!=NULL) q.push(front->right);
+    }
+    cout<<endl;
+    return;
+}
+
+
 
 int main(){
     Node* a=new Node(1);
@@ -106,6 +135,8 @@ int main(){
     displayTree(a);
     cout<<endl;
 
+    cout<<"level of tree is: "<<level(a)<<endl;
+
     cout<<"Sum of tree element: "<<sum(a)<<endl;
     cout<<"Size of tree : "<<size(a)<<endl;
 
@@ -124,6 +155,12 @@ int main(){
     cout<<"postOrder: ";
     postorder(a);
     cout<<endl;
-    print_Nth_Level_Ele(a,1,2); // level 2 ele
+    print_Nth_Level_Ele(a,1,2); // level 2 eles print 
+    cout<<endl;
+    cout<<"Level order Traversal: "<<endl;
+    levelOrder(a);
+    cout<<endl;
+    cout<<"Level order Using Queue: ";
+    levelOrder_Queue(a);
     return 0;
 }
