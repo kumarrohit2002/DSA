@@ -48,3 +48,20 @@ int main(){
     g.printAdjList();
     return 0;
 }
+
+
+
+// Enter the no of Nodes: 5
+// Enter the no of Edges: 6
+// 0 1
+// 1 2
+// 2 3
+// 3 4
+// 3 1
+// 4 0
+
+// 4-> 3 0 
+// 0-> 1 4 
+// 1-> 0 2 3 
+// 2-> 1 3 
+// 3-> 2 4 1 
