@@ -69,7 +69,7 @@ int main(){
     cout<<minlevel<<" "<<maxlevel<<endl;
 
     vector<int> ans(maxlevel-minlevel+1,INT32_MIN);
-
+ 
     topView(root,ans,-minlevel);
     for(int i:ans) cout<<i<<" ";
 
